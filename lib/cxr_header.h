@@ -6,9 +6,16 @@
 #ifndef NERUALNETWORK_CXR_HEADER_H
 #define NERUALNETWORK_CXR_HEADER_H
 
-#include "cmath"
+#include <cmath>
 
-#define node_type double
+typedef double node_type;
+
+
+class IFunction {
+public:
+    virtual node_type activation(node_type)=0;
+    virtual node_type d_activation(node_type)=0;
+};
 
 class Sigmoid : public virtual IFunction {
 public:
@@ -36,7 +43,7 @@ public:
 class ReLU : public virtual IFunction {
 public:
     virtual node_type activation(node_type value) {
-        return max(value, 0);
+        return fmax(value, 0);
     }
 
     virtual node_type d_activation(node_type value) {
