@@ -14,22 +14,30 @@ class Layer{
 private:
     int input_size;
     int output_size;
-    valarray<node_type >biases;
-    valarray<node_type >val;
-    valarray<node_type >integration;
+    node_type *biases;
+    node_type *value;
+    node_type *integration;
     node_type **weight;
-    valarray<node_type >ddelta;
+    node_type *ddelta;
+
     Layer*nextLayer;
     Layer*preLayer;
-    IFunction*activation;
+    IFunction *actfunction;
+
+    void set_function(int a);
+    void inin_wb();
+    node_type *inputdata;
+
 public:
     enum action{Sigmoid=1,ReLU,Tanh};
-    Layer(int _inputsize,int _outputsize,action function);
+    Layer(int _inputsize,int _outputsize,action function = Layer::Sigmoid);
     ~Layer();
     void set_input(node_type*input);
     void read_output()const;
     void forward();
     void backward();
-    void get_val();
+    node_type *get_val();
+    friend ostream &operator<<(ostream& os,Layer&one);
+    void dubug();
 };
 #endif //NERUALNETWORK_LAYER_H
