@@ -12,30 +12,24 @@ using namespace std;
 
 class Layer{
 private:
-
-    int size;                           //当前层的大小
-    int pre_size;                       //前一层的大小
-    Layer *preLayer;
-    Layer *nextLayer;
-    IFunction *actfunction;
-    node_type *value;                   // 激活值f(z)
-    node_type *integeration;            //z = wx+b
-    node_type *biases;                  //b
-    node_type **weights;                //前一层到这一层的w;
-    node_type *ddelta;
-    int select_action;
-    void set_function();
+    int input_size;
+    int output_size;
+    valarray<node_type >biases;
+    valarray<node_type >val;
+    valarray<node_type >integration;
+    node_type **weight;
+    valarray<node_type >ddelta;
+    Layer*nextLayer;
+    Layer*preLayer;
+    IFunction*activation;
 public:
     enum action{Sigmoid=1,ReLU,Tanh};
-    Layer(int _size,const Layer *pre, action function);
-    int getsize()const;
+    Layer(int _inputsize,int _outputsize,action function);
     ~Layer();
-    explicit Layer(int _size,node_type input[]);
+    void set_input(node_type*input);
     void read_output()const;
-    void forward_propagation(const Layer *pre);//根据前一层的值计算这一层的值
-    void backward_propagation();
-    friend ostream& operator <<(ostream&,const Layer*layer);//输出层相关的信息
-
-
+    void forward();
+    void backward();
+    void get_val();
 };
 #endif //NERUALNETWORK_LAYER_H
