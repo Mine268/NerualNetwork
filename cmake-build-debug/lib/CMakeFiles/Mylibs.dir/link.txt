@@ -1,0 +1,2 @@
+D:\mingw64\mingw64\bin\ar.exe qc libMylibs.a CMakeFiles/Mylibs.dir/Layer.cpp.obj
+D:\mingw64\mingw64\bin\ranlib.exe libMylibs.a

@@ -1,0 +1,4 @@
+"D:\install\CLion 2021.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\study\CLionProjects\net\NerualNetwork
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug

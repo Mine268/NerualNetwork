@@ -1,0 +1,3 @@
+"D:\install\CLion 2021.1.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Layertest.dir/objects.a
+D:\mingw64\mingw64\bin\ar.exe cr CMakeFiles\Layertest.dir/objects.a @CMakeFiles\Layertest.dir\objects1.rsp
+D:\mingw64\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\Layertest.dir/objects.a -Wl,--no-whole-archive -o Layertest.exe -Wl,--out-implib,libLayertest.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Layertest.dir\linklibs.rsp
