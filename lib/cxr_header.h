@@ -13,8 +13,9 @@ typedef double node_type;
 
 class IFunction {
 public:
-    virtual node_type activation(node_type)=0;
-    virtual node_type d_activation(node_type)=0;
+    virtual node_type activation(node_type) = 0;
+
+    virtual node_type d_activation(node_type) = 0;
 };
 
 class Sigmoid : public virtual IFunction {
