@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="NerualNetwork"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\lib\;CMake Files\src\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Mylibs">
+				<Option output="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/libMylibs.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 Mylibs"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Mylibs/fast">
+				<Option output="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/libMylibs.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 Mylibs/fast"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Layertest">
+				<Option output="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Layertest.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/study/CLionProjects/net/NerualNetwork/lib"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 Layertest"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Layertest/fast">
+				<Option output="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Layertest.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/study/CLionProjects/net/NerualNetwork/lib"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 Layertest/fast"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="main">
+				<Option output="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/main.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/study/CLionProjects/net/NerualNetwork/lib"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 main"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="main/fast">
+				<Option output="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/main.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/study/CLionProjects/net/NerualNetwork/lib"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 main/fast"/>
+					<CompileFile command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/study/CLionProjects/net/NerualNetwork/lib/Layer.cpp">
+			<Option target="Mylibs"/>
+		</Unit>
+		<Unit filename="D:/study/CLionProjects/net/NerualNetwork/lib/Layer.h">
+			<Option target="Mylibs"/>
+		</Unit>
+		<Unit filename="D:/study/CLionProjects/net/NerualNetwork/src/Layertest.cpp">
+			<Option target="Layertest"/>
+		</Unit>
+		<Unit filename="D:/study/CLionProjects/net/NerualNetwork/src/main.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="D:/study/CLionProjects/net/NerualNetwork/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="D:/study/CLionProjects/net/NerualNetwork/lib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\"/>
+		</Unit>
+		<Unit filename="D:/study/CLionProjects/net/NerualNetwork/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
