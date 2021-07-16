@@ -5,14 +5,14 @@
 #include "Layer.h"
 #include <random>
 #include <iterator>
-#include <ctime>
 
-Layer::Layer(int _inputsize, int _outputsize, action function) {
-    input_size = _inputsize;
-    output_size = _outputsize;
+
+void Layer::new_data() {
     weight = new node_type *[input_size];
+    dweight = new node_type *[input_size];
     for (int i = 0; i < input_size; i++) {
         weight[i] = new node_type[output_size];
+        dweight[i] = new node_type[output_size];
     }
     biases = new node_type[output_size];
     value = new node_type[output_size];
@@ -20,12 +20,24 @@ Layer::Layer(int _inputsize, int _outputsize, action function) {
     ddelta = new node_type[output_size];
     inputdata = new node_type[input_size];
     dbiases = new node_type[output_size];
+}
 
-    dweight = new node_type *[input_size];
-    for (int i = 0; i < input_size; i++) {
-        dweight[i] = new node_type[output_size];
-    }
-    set_function(function);
+Layer::Layer(int _inputsize, int _outputsize, action function) {
+    input_size = _inputsize;
+    output_size = _outputsize;
+    action_choose = function;
+    new_data();
+    set_function(action_choose);
+    inin_wb();
+
+}
+
+Layer::Layer(const Layer & one) {
+    //复制构造函数不会复制数据，而只是初始化其大小，选择的激活函数与传入的对象相同
+    input_size = one.input_size;
+    output_size = one.output_size;
+    new_data();
+    set_function(one.action_choose);
     inin_wb();
 }
 
@@ -58,8 +70,9 @@ void Layer::set_function(int choose) {
 }
 
 void Layer::inin_wb() {
-    auto seed = (unsigned)time(0);
+//    auto seed = (unsigned)time(NULL);
 //    auto seed = 3;//固定值用来debug
+    auto seed = rand()%1000;
     default_random_engine engine_need(seed);
     normal_distribution<node_type> distribution;
     for (int i = 0; i < input_size; i++) {
@@ -149,7 +162,6 @@ void Layer::dubug() {
     cout << "integration: \n";
     for_each(integration, integration + output_size, [](node_type val) { cout << val << " "; });
     cout << endl;
-
     cout << "inputdata: \n";
     for_each(inputdata, inputdata + input_size, [](node_type val) { cout << val << " "; });
     cout << endl;

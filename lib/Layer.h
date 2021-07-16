@@ -8,9 +8,10 @@
 #include <valarray>
 #include "cxr_header.h"
 #include <iostream>
+
 using namespace std;
 
-class Layer{
+class Layer {
 private:
     int input_size;
     int output_size;
@@ -20,27 +21,47 @@ private:
     node_type **weight;
     node_type *ddelta;//
     node_type *dbiases;
-    node_type  **dweight;
-    Layer*nextLayer;
-    Layer*preLayer;
+    node_type **dweight;
+    node_type *inputdata;
+
+
     IFunction *actfunction;
+    int action_choose;
+
 
     void set_function(int a);
     void inin_wb();
-    node_type *inputdata;
+    void new_data();
+
 
 public:
-    enum action{Sigmoid=1,ReLU,Tanh};
-    Layer(int _inputsize,int _outputsize,action function = Layer::Sigmoid);
+    enum action {
+        Sigmoid = 1, ReLU, Tanh
+    };
+
+    Layer(int _inputsize, int _outputsize, action function = Layer::Sigmoid);
+
+    Layer(const Layer&);
+
     ~Layer();
-    void set_input(node_type*input);//传入上一层的value
-    void read_output()const;
-    void forward(bool useactfunction= true);
+
+    void set_input(node_type *input);//传入上一层的value
+
+    void read_output() const;
+
+    void forward(bool useactfunction = true);
+
     void backward(Layer &next);
+
     node_type *get_val();
+
     void set_ddelta(node_type *delta);  //传入下一层的ddelta
-    friend ostream &operator<<(ostream& os,Layer&one);
+
+    friend ostream &operator<<(ostream &os, Layer &one);
+
     void dubug();
+
     void debug2();
 };
+
 #endif //NERUALNETWORK_LAYER_H

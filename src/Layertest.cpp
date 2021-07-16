@@ -1,12 +1,11 @@
 #include "Layer.h"
 #include <iostream>
 #include <valarray>
-#include "../lib/cxr_header.h"
+#include <windows.h>
 using namespace std;
 
 
-
-int main() {
+void test_forward_backward(){
     double x []={1,1,1};
     Layer layer(3,2,Layer::ReLU);
     cout<<layer;
@@ -30,5 +29,17 @@ int main() {
 //
     layer.backward(layer1);
     layer.debug2();
+}
+void test_copy_operator(){
+    Layer first(2,4,Layer::Sigmoid);
+    Layer two(first);
+    cout<<first;
+    cout<<two;
+
+}
+
+int main() {
+//    test_forward_backward();
+    test_copy_operator();
 
 }
