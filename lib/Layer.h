@@ -25,21 +25,13 @@ private:
     node_type *inputdata;
 
 
-    IFunction *actfunction;
-    int action_choose;
-
-
-    void set_function(int a);
-    void inin_wb();
-    void new_data();
-
+    IFunction &actfunction;
+    void init_wb();//初始化weight与biases
+    void new_data();//申请空间
 
 public:
-    enum action {
-        Sigmoid = 1, ReLU, Tanh
-    };
 
-    Layer(int _inputsize, int _outputsize, action function = Layer::Sigmoid);
+    Layer(int _inputsize, int _outputsize, IFunction& function);
 
     Layer(const Layer&);
 
@@ -54,6 +46,8 @@ public:
     void backward(Layer &next);
 
     node_type *get_val();
+
+    IFunction& get_IFunction();
 
     void set_ddelta(node_type *delta);  //传入下一层的ddelta
 

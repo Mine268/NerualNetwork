@@ -22,23 +22,20 @@ void Layer::new_data() {
     dbiases = new node_type[output_size];
 }
 
-Layer::Layer(int _inputsize, int _outputsize, action function) {
+Layer::Layer(int _inputsize, int _outputsize, IFunction& function):actfunction(function) {
     input_size = _inputsize;
     output_size = _outputsize;
-    action_choose = function;
     new_data();
-    set_function(action_choose);
-    inin_wb();
+    init_wb();
 
 }
 
-Layer::Layer(const Layer & one) {
+Layer::Layer(const Layer & one):actfunction(one.actfunction) {
     //复制构造函数不会复制数据，而只是初始化其大小，选择的激活函数与传入的对象相同
     input_size = one.input_size;
     output_size = one.output_size;
     new_data();
-    set_function(one.action_choose);
-    inin_wb();
+    init_wb();
 }
 
 Layer::~Layer() {
@@ -46,7 +43,6 @@ Layer::~Layer() {
         delete[]weight[i];
         delete[]dweight[i];
     }
-    delete actfunction;
     delete[]biases;
     delete[]value;
     delete[]integration;
@@ -55,21 +51,11 @@ Layer::~Layer() {
     delete[] dbiases;
 }
 
-void Layer::set_function(int choose) {
-    switch (choose) {
-        case 1:
-            actfunction = new class Sigmoid;
-            break;
-        case 2:
-            actfunction = new class ReLU;
-            break;
-        case 3:
-            actfunction = new class Tanh;
-            break;
-    }
+IFunction & Layer::get_IFunction() {
+    return actfunction;
 }
 
-void Layer::inin_wb() {
+void Layer::init_wb() {
 //    auto seed = (unsigned)time(NULL);
 //    auto seed = 3;//固定值用来debug
     auto seed = rand()%1000;
@@ -125,7 +111,7 @@ void Layer::forward(bool useactfunction) {
         }
         integration[i] = z;
         if (useactfunction)
-            value[i] = actfunction->activation(z);
+            value[i] = actfunction.activation(z);
         else value[i] = z;
     }
 }
@@ -140,7 +126,7 @@ void Layer::backward(Layer &next) {
     for (int i = 0; i < output_size; i++) {
         node_type sum = 0;
         for (int k = 0; k < next.output_size; k++) {
-            sum += next.ddelta[k] * next.weight[i][k] * actfunction->d_activation(integration[i]);
+            sum += next.ddelta[k] * next.weight[i][k] * actfunction.d_activation(integration[i]);
         }
         ddelta[i] = sum;
     }
@@ -157,6 +143,7 @@ void Layer::backward(Layer &next) {
         biases[i] -= dbiases[i];
     }
 }
+
 
 void Layer::dubug() {
     cout << "integration: \n";
