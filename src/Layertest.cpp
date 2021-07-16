@@ -24,12 +24,11 @@ int main() {
     layer1.dubug();//打印integeration
 
     //反向传播测试
-    //假设误差函数使用均方误差，目标值为0
-    double ddelta[] = {-0.113};//需要计算并手动设置最后一层的ddelta
+    double ddelta[] = {-0.22};
     layer1.set_ddelta(ddelta);
-
-    layer1.backward();
     layer1.debug2();
-    layer.backward(&layer1);//前面的层只需要将后一层传入即可
+//
+    layer.backward(layer1);
     layer.debug2();
+
 }

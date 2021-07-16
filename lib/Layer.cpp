@@ -59,7 +59,7 @@ void Layer::set_function(int choose) {
 
 void Layer::inin_wb() {
     auto seed = (unsigned)time(0);
-//    auto seed = 3;//固定值用来测试
+//    auto seed = 3;//固定值用来debug
     default_random_engine engine_need(seed);
     normal_distribution<node_type> distribution;
     for (int i = 0; i < input_size; i++) {
@@ -87,6 +87,7 @@ void Layer::read_output() const {
     cout << endl;
 
 }
+
 ostream &operator<<(ostream &os, Layer &one) {
     os << "input_size: " << one.input_size << endl;
     os << "output_size: " << one.output_size << endl;
@@ -121,17 +122,14 @@ void Layer::set_ddelta(node_type *delta) {
 }
 
 
-void Layer::backward(Layer *next) {
+void Layer::backward(Layer &next) {
     //第一步，根据下一层的ddelta 求出当前层的ddelta
-    if (next != nullptr) {
-        //如果不是最后一层
-        for (int i = 0; i < output_size; i++) {
-            node_type sum = 0;
-            for (int k = 0; k < next->output_size; k++) {
-                sum += next->ddelta[k] * next->weight[i][k] * actfunction->d_activation(integration[i]);
-            }
-            ddelta[i] = sum;
+    for (int i = 0; i < output_size; i++) {
+        node_type sum = 0;
+        for (int k = 0; k < next.output_size; k++) {
+            sum += next.ddelta[k] * next.weight[i][k] * actfunction->d_activation(integration[i]);
         }
+        ddelta[i] = sum;
     }
     //第二步，求ddweight
     for (int i = 0; i < input_size; i++) {
@@ -161,12 +159,4 @@ void Layer::debug2() {
     cout << "ddelta: \n";
     for_each(ddelta, ddelta + output_size, [](node_type val) { cout << val << " "; });
     cout << endl;
-
-    cout << "dweight: \n";
-    for (int i = 0; i < input_size; i++) {
-        for (int j = 0; j < output_size; j++) {
-            cout << dweight[i][j] << " ";
-        }
-        cout << endl;
-    }
 }

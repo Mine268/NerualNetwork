@@ -1,9 +1,0 @@
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/CMakeFiles/Mylibs.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/CMakeFiles/edit_cache.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/lib/CMakeFiles/rebuild_cache.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/CMakeFiles/Layertest.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/CMakeFiles/edit_cache.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/CMakeFiles/main.dir
-D:/study/CLionProjects/net/NerualNetwork/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
