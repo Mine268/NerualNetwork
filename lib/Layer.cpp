@@ -81,10 +81,17 @@ void Layer::set_input(const node_type *input) {
     copy(input, input + input_size, preval);
 }
 
-const node_type *Layer::read_output() const {
+const node_type *Layer::get_val(){
     //返回当前层的激活值
     return value;
 }
+
+void Layer::read_output() const {
+    cout << "values: \n";
+    for_each(value, value + output_size, [](node_type val) { cout << val << " "; });
+    cout << endl;
+}
+
 
 ostream &operator<<(ostream &os, Layer &one) {
     //打印层的相关信息，包括其大小，weight，biases
@@ -122,7 +129,7 @@ void Layer::set_ddelta(node_type *delta) {
 }
 
 
-void Layer::back_propagation(Layer &preLayer) {
+void Layer::back_propagation(Layer &preLayer,node_type learning_rate) {
     //传入后一层，并根据后一层的ddelta，求当前层的ddelta,再求出dweight与dbiases
     //第一步，求出当前层的ddelta
     for (int i = 0; i < output_size; i++) {
@@ -136,13 +143,13 @@ void Layer::back_propagation(Layer &preLayer) {
     for (int i = 0; i < input_size; i++) {
         for (int j = 0; j < output_size; ++j) {
             dweight[i][j] = ddelta[j] * preval[i];
-            weight[i][j] -= dweight[i][j];
+            weight[i][j] -= (learning_rate*dweight[i][j]);
         }
     }
     //第三步，求dbiases;
     for (int i = 0; i < output_size; i++) {
         dbiases[i] = ddelta[i];
-        biases[i] -= dbiases[i];
+        biases[i] -= (learning_rate*dbiases[i]);
     }
 }
 

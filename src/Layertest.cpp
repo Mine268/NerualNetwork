@@ -16,7 +16,7 @@ void test_forward_backward(){
 
     Layer layer1(2,1,sigmoid);
     cout<<layer1;
-    layer1.set_input(layer.read_output());//输入
+    layer1.set_input(layer.get_val());//输入
     layer1.forward_propagation(false);//前向传播计算,到输出层不需要使用激活函数
     layer1.read_output();//打印value
     layer1.debug();//打印integeration
@@ -26,7 +26,7 @@ void test_forward_backward(){
     layer1.set_ddelta(ddelta);
     layer1.debug2();
 //
-    layer.back_propagation(layer1);
+    layer.back_propagation(layer1,0.2);
     layer.debug2();
 }
 void test_copy_operator(){
@@ -39,7 +39,7 @@ void test_copy_operator(){
 }
 
 int main() {
-//    test_forward_backward();
-    test_copy_operator();
+    test_forward_backward();
+//    test_copy_operator();
 
 }
