@@ -6,7 +6,7 @@
 #ifndef NERUALNETWORK_IFUNCTION_H
 #define NERUALNETWORK_IFUNCTION_H
 
-#include "../cxr_header.h"
+#include "./cxr_header.h"
 
 class IFunction {
 public:
