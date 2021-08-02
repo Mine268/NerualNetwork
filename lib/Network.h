@@ -16,7 +16,9 @@ class Network {
 	// 神经网络的层
 	Layer** layers;
 	// 神经网络的层数
-	std::size_t layer_size;
+	std::size_t layer_count;
+    // 神经网络的每层的大小
+    std::size_t* layer_length;
 
    public:
 	// 通过初始化列表的方式实现不定参数
