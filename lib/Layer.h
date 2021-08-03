@@ -5,9 +5,10 @@
 #ifndef NERUALNETWORK_LAYER_H
 #define NERUALNETWORK_LAYER_H
 
-#include <valarray>
-#include "cxr_header.h"
 #include <iostream>
+#include <algorithm>
+#include "cxr_header.h"
+#include "IFunction.h"
 
 using namespace std;
 

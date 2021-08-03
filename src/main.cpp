@@ -1,10 +1,9 @@
 #include <iostream>
-#include <valarray>
-#include "Layer.h"
+#include "../lib/Network.h"
 
-
-using namespace std;
 int main() {
-    cout<<"ok\n";
-    return 0;
+	Network nn({Network::layer((std::size_t)10, func_sigmoid),
+				Network::layer((std::size_t)12, func_sigmoid),
+				Network::layer((std::size_t)10, func_sigmoid)});
+	return 0;
 }

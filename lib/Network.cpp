@@ -1,7 +1,7 @@
 #include "Network.h"
 
 Network::Network(std::initializer_list<LayerConstructionInfo*> list)
-	: layers(nullptr), layer_count(0) {
+	: layers(nullptr), layer_count(0), layer_length(nullptr) {
 	// 首先计算出总共需要多少层
 	for (auto lyrInfo : list) ++layer_count;
 
@@ -9,7 +9,7 @@ Network::Network(std::initializer_list<LayerConstructionInfo*> list)
 	layers = new Layer*[layer_count];
 	layer_length = new std::size_t[layer_count];
 
-	auto indication = list.end();
+	auto indication = list.end() - 1;
 	std::size_t tmp = 1;
 	// 最后一层建立
 	layers[layer_count - tmp] =
