@@ -8,3 +8,6 @@ AUX_SOURCE_DIRECTORY(./ DIR)
 ADD_EXECUTABLE(Layertest Layertest.cpp)
 ADD_EXECUTABLE(main main.cpp)
 target_link_libraries(Layertest Mylibs)
+
+add_executable(fileTest fileTest.cpp)
+target_link_libraries(fileTest Mylibs)
