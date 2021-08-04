@@ -5,7 +5,7 @@
 #include "Layer.h"
 #include <random>
 #include <iterator>
-
+#include <time.h>
 
 void Layer::new_data() {
     //申请相应的空间
@@ -59,7 +59,8 @@ IFunction & Layer::get_IFunction() {
 void Layer::init_wb() {
     //初始化weight矩阵与biases,biases全部初始化为0，weight初始化为均值为0，方差为1的矩阵
     //初始化weight的过程中顺带把dweight初始化为0
-    //    auto seed = 3;//固定值用来debug
+//    auto seed = 4;//固定值用来debug
+//    default_random_engine engine_need(seed);
     default_random_engine engine_need(time(nullptr));
     normal_distribution<node_type> distribution(0,1);
     for (int i = 0; i < input_size; i++) {
@@ -81,7 +82,7 @@ void Layer::set_input(const node_type *input) {
 }
 
 const node_type *Layer::get_val(){
-    //返回当前层的激活值
+    //返回当前层的激活值,对于最后一层来说，返回的值与integeration是一样的
     return value;
 }
 
