@@ -25,8 +25,6 @@ private:
     node_type *dbiases;//最终版本应该会删除，此处只用于测试层是否工作正常
     node_type **dweight;//也会被删除
 
-
-
     IFunction &activation;
 
     // 将全体数据随机化生成，随机化依据是标准正态分布
@@ -37,8 +35,8 @@ private:
 public:
     // 构造
     // 函数，参数含义分别是
+    // - 上一层的节点个数
     // - 本层的节点个数
-    // - 下一层的节点个数
     // - 激活函数
     Layer(int _inputsize, int _outputsize, IFunction& function);
 
@@ -53,6 +51,9 @@ public:
 
     //返回激活值
     const node_type *get_val() ;
+
+    // 返回整合值
+    const node_type *get_integeration();
 
     //打印当前层的激活值
     void read_output() const;

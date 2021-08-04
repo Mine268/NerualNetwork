@@ -6,10 +6,11 @@
 #ifndef NERUALNETWORK_LAYERCONSTRUCTIONINFO_H
 #define NERUALNETWORK_LAYERCONSTRUCTIONINFO_H
 
+#include <iostream>
 #include "cxr_header.h"
 
 struct LayerConstructionInfo {
-    int size;
+    std::size_t size;
     IFunction * activation;
 };
 
