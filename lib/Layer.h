@@ -8,7 +8,7 @@
 #include <valarray>
 #include "cxr_header.h"
 #include <iostream>
-
+#include <time.h>
 using namespace std;
 
 class Layer {
@@ -36,8 +36,8 @@ private:
 public:
     // 构造
     // 函数，参数含义分别是
-    // - 本层的节点个数
-    // - 下一层的节点个数
+    // - 前一层的的节点个数，对于第一层来说，前一层的节点个数就是输入的大小
+    // - 当前层的层的节点个数
     // - 激活函数
     Layer(int _inputsize, int _outputsize, IFunction& function);
 
@@ -60,12 +60,12 @@ public:
     void forward_propagation(bool use_activation = true);
 
     //反向传播 根据next层的数据计算这一层的反向传播并减到对应参数上
-    void back_propagation(Layer &preLayer,node_type learning_rate);
+    void back_propagation(Layer *preLayer,node_type learning_rate=0.1);
 
     //获取激活函数
     IFunction& get_IFunction();
 
-    //传入下一层的ddelta
+    //传入最后一层的ddelta
     void set_ddelta(node_type *delta);
 
     //打印层的相关信息

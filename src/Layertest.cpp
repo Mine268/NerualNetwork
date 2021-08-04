@@ -5,29 +5,36 @@ using namespace std;
 
 void test_forward_backward(){
     double x []={1,1,1};
-    Sigmoid sigmoid;
-    Layer layer(3,2,sigmoid);
+    ReLU reLu;
+    Layer layer(3,2,reLu);
     cout<<layer;
-    layer.set_input(x);//è¾“å…¥
-    layer.forward_propagation();//å‰å‘ä¼ æ’­è®¡ç®—
-    layer.read_output();//æ‰“å°value
-    layer.debug();//æ‰“å°integeration
+    layer.set_input(x);//ÊäÈë
+    layer.forward_propagation();//Ç°Ïò´«²¥¼ÆËã
+    layer.read_output();//´òÓ¡value
+    layer.debug();//´òÓ¡integeration
 
 
-    Layer layer1(2,1,sigmoid);
+    Layer layer1(2,1,reLu);
     cout<<layer1;
-    layer1.set_input(layer.get_val());//è¾“å…¥
-    layer1.forward_propagation(false);//å‰å‘ä¼ æ’­è®¡ç®—,åˆ°è¾“å‡ºå±‚ä¸éœ€è¦ä½¿ç”¨æ¿€æ´»å‡½æ•°
-    layer1.read_output();//æ‰“å°value
-    layer1.debug();//æ‰“å°integeration
+    layer1.set_input(layer.get_val());//ÊäÈë
+    layer1.forward_propagation(false);//Ç°Ïò´«²¥¼ÆËã,µ½Êä³ö²ã²»ÐèÒªÊ¹ÓÃ¼¤»îº¯Êý
+    layer1.read_output();//´òÓ¡value
+    layer1.debug();//´òÓ¡integeration
 
-    //åå‘ä¼ æ’­æµ‹è¯•
+    //·´Ïò´«²¥²âÊÔ
     double ddelta[] = {-0.22};
     layer1.set_ddelta(ddelta);
+    layer1.back_propagation(nullptr,1);
     layer1.debug2();
+
+    cout<<"·´Ïò´«²¥ºó£º"<<endl;
+    cout<<layer1;
 //
-    layer.back_propagation(layer1,0.2);
+    layer.back_propagation(&layer1,1);
     layer.debug2();
+
+    cout<<"·´Ïò´«²¥ºó£º"<<endl;
+    cout<<layer;
 }
 void test_copy_operator(){
     Sigmoid sigmoid;
