@@ -6,7 +6,7 @@
 #ifndef NERUALNETWORK_IFUNCTION_H
 #define NERUALNETWORK_IFUNCTION_H
 
-#include "../cxr_header.h"
+#include "./cxr_header.h"
 
 class IFunction {
 public:
@@ -25,7 +25,7 @@ public:
         double sigma = activation(value);
         return sigma * (1 - sigma);
     }
-} func_sigmoid;
+};
 
 class Tanh : public virtual IFunction {
 public:
@@ -36,7 +36,7 @@ public:
     virtual node_type d_activation(node_type value) {
         return 1 - pow(activation(value), 2.);
     }
-} func_tanh;
+};
 
 class ReLU : public virtual IFunction {
 public:
@@ -47,7 +47,10 @@ public:
     virtual node_type d_activation(node_type value) {
         return value > 0 ? 1 : 0;
     }
-} func_ReLU;
+};
 
+extern Sigmoid func_sigmoid;
+extern Tanh func_tanh;
+extern ReLU func_ReLU;
 
 #endif //NERUALNETWORK_IFUNCTION_H

@@ -85,6 +85,10 @@ const node_type *Layer::get_val(){
     return value;
 }
 
+const node_type *Layer::get_integeration() {
+    return integeration;
+}
+
 void Layer::read_output() const {
     cout << "values: \n";
     for_each(value, value + output_size, [](node_type val) { cout << val << " "; });

@@ -1,10 +1,19 @@
 #include <iostream>
-#include <valarray>
-#include "Layer.h"
+#include "../lib/Network.h"
 
-
-using namespace std;
 int main() {
-    cout<<"ok\n";
-    return 0;
+	Network nn({Network::layer(2, func_sigmoid),
+				Network::layer(3, func_sigmoid),
+				Network::layer(3, func_sigmoid)});
+
+    nn.print_network(std::cout);
+
+    auto res = nn.evaluate(new double[2]{1., -1.});
+
+    for (std::size_t i = 0; i < 3; ++i)
+        std::cout << res[i] << ' ';
+
+    std::cout << std::endl;
+
+	return 0;
 }

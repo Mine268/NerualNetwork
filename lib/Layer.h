@@ -5,10 +5,10 @@
 #ifndef NERUALNETWORK_LAYER_H
 #define NERUALNETWORK_LAYER_H
 
-#include <valarray>
-#include "cxr_header.h"
 #include <iostream>
-#include <time.h>
+#include <algorithm>
+#include "cxr_header.h"
+#include "IFunction.h"
 using namespace std;
 
 class Layer {
@@ -23,8 +23,6 @@ private:
     node_type *ddelta;//
     node_type *dbiases;//最终版本应该会删除，此处只用于测试层是否工作正常
     node_type **dweight;//也会被删除
-
-
 
     IFunction &activation;
 
@@ -52,6 +50,9 @@ public:
 
     //返回激活值
     const node_type *get_val() ;
+
+    // 返回整合值
+    const node_type *get_integeration();
 
     //打印当前层的激活值
     void read_output() const;
