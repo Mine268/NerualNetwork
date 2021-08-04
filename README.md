@@ -16,10 +16,10 @@
 
    ```cpp
    // 建立神经网络nw
-   Network nw(Network.Layer(28*28, func_sigmoid),
-              Network.Layer(13, func_sigmoid),
-              Network.Layer(10, func_sigmoid),
-              Network.Layer(10, func_sigmoid));
+   Network nw({Network.Layer(28*28, func_sigmoid),
+               Network.Layer(13, func_sigmoid),
+               Network.Layer(10, func_sigmoid),
+               Network.Layer(10, func_sigmoid)});
    ```
 
    这个网络输入是一个`28*28`的向量，输出一个10维的向量，层与层之间完全连接，使用`sigmoid`作为激活函数，可以使用的激活函数默认包括三种
@@ -44,7 +44,7 @@
    > 可以加入每一次epoch后检查训练的正确率的功能。
    >
    > ```cpp
-   > nw.fit(1., 30, 50, "./mnist/train-image-idx3-ubyte", "./mnist/train-label-idx1-ubyte", "./mnist/test-image-idx3-ubyte", "./mnist/tes-label-idx1-ubyte");
+   > nw.fit(1., 30, 50, "./mnist/train-image-idx3-ubyte", "./mnist/train-label-idx1-ubyte");
    > ```
    >
    > - `test-image-idx3-ubyte` 验证的数据文件
