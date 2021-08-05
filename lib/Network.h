@@ -5,13 +5,13 @@
 #ifndef NERUALNWTWORK_NETWORK_H
 #define NERUALNWTWORK_NETWORK_H
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
-#include "cxr_header.h"
 #include "IFunction.h"
 #include "Layer.h"
 #include "LayerConstructionInfo.h"
+#include "cxr_header.h"
 
 class Network {
    private:
@@ -21,8 +21,10 @@ class Network {
 	std::size_t layer_count;
 	// 神经网络的每层的大小
 	std::size_t* layer_length;
-    // 根据单一样本的误差进行反向传播，利用平方平均方法
-    void single_fit(double learning_rate, node_type target[]);
+
+   public:
+	// 根据单一样本的误差进行反向传播，利用平方平均方法
+	void single_fit(double learning_rate, node_type target[]);
 
    public:
 	// 通过初始化列表的方式实现不定参数
@@ -39,12 +41,12 @@ class Network {
 	void fit(double learningRate, int epoch, int batch_size,
 			 std::string data_path, std::string label_path);
 	// 依据输入进行计算得到输出
-    // data就是输入向量，注意输入向量的维数必须与神经网络的第一层相同，如果不相同则结果未定义
+	// data就是输入向量，注意输入向量的维数必须与神经网络的第一层相同，如果不相同则结果未定义
 	const double* evaluate(node_type data[]);
-    // 输出网络，用于验证
-    void print_network(ostream &out) const;
-    // 返回运算结果
-    const node_type* get_result();
+	// 输出网络，用于验证
+	void print_network(ostream& out) const;
+	// 返回运算结果
+	const node_type* get_result();
 
 	// 这是在构造时调用的静态函数
 	static LayerConstructionInfo* layer(std::size_t size, IFunction& func);
