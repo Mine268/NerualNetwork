@@ -5,7 +5,7 @@
 #include "Layer.h"
 #include <random>
 #include <iterator>
-
+#include <time.h>
 
 void Layer::new_data() {
     //申请相应的空间
@@ -59,9 +59,9 @@ IFunction & Layer::get_IFunction() {
 void Layer::init_wb() {
     //初始化weight矩阵与biases,biases全部初始化为0，weight初始化为均值为0，方差为1的矩阵
     //初始化weight的过程中顺带把dweight初始化为0
-    //    auto seed = 3;//固定值用来debug
-    auto seed = rand()%1000;
-    default_random_engine engine_need(seed);
+//    auto seed = 4;//固定值用来debug
+//    default_random_engine engine_need(seed);
+    default_random_engine engine_need(time(nullptr));
     normal_distribution<node_type> distribution(0,1);
     for (int i = 0; i < input_size; i++) {
         for (int j = 0; j < output_size; j++) {
@@ -77,12 +77,12 @@ void Layer::init_wb() {
 
 void Layer::set_input(const node_type *input) {
     //将传入的数据保存在inputdata中，方便前向传播使用
-    //对于第一层来说，就是传入训练集数据，对于后面的层来说，要使用read_output获取前一层的value然后传入input_data中
+    //对于第一层来说，就是传入训练集数据，对于后面的层来说，要使用get_val获取前一层的value然后传入input_data中
     copy(input, input + input_size, preval);
 }
 
 const node_type *Layer::get_val(){
-    //返回当前层的激活值
+    //返回当前层的激活值,对于最后一层来说，返回的值与integeration是一样的
     return value;
 }
 
@@ -127,21 +127,24 @@ void Layer::forward_propagation(bool useactfunction) {
     }
 }
 
+
 void Layer::set_ddelta(node_type *delta) {
     //保存传入的detal,用于最后一层，因最后一层的损失函数需要在Net层计算，需要传入最后一层
     copy(delta, delta + output_size, ddelta);
 }
 
 
-void Layer::back_propagation(Layer &preLayer,node_type learning_rate) {
+void Layer::back_propagation(Layer *backLayer,node_type learning_rate) {
     //传入后一层，并根据后一层的ddelta，求当前层的ddelta,再求出dweight与dbiases
     //第一步，求出当前层的ddelta
-    for (int i = 0; i < output_size; i++) {
-        node_type sum = 0;
-        for (int k = 0; k < preLayer.output_size; k++) {
-            sum += preLayer.ddelta[k] * preLayer.weight[i][k] * activation.d_activation(integeration[i]);
+    if(backLayer!=nullptr){
+        for (int i = 0; i < output_size; i++) {
+            node_type sum = 0;
+            for (int k = 0; k < backLayer->output_size; k++) {
+                sum += backLayer->ddelta[k] * backLayer->weight[i][k] * activation.d_activation(integeration[i]);
+            }
+            ddelta[i] = sum;
         }
-        ddelta[i] = sum;
     }
     //第二步，求ddweight
     for (int i = 0; i < input_size; i++) {

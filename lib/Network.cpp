@@ -65,14 +65,17 @@ void Network::single_fit(double learning_rate, node_type target[]) {
 	node_type* last_delta = new node_type[layer_length[layer_count - 1]];
 
 	for (std::size_t i = 0; i < layer_length[layer_count - 1]; ++i)
-		last_delta[i] = (layers[layer_count - 1]->get_val()[i] - target[i]) *
+		last_delta[i] = (layers[layer_count-1]->get_val()[i]-target[i]) *
 						layers[layer_count - 1]->get_IFunction().d_activation(
 							layers[layer_count - 1]->get_integeration()[i]);
 
 	layers[layer_count - 1]->set_ddelta(last_delta);
 
+	//CLF 修改
+    layers[layer_count-1]->back_propagation(nullptr,learning_rate);
+
 	for (std::size_t i = layer_count - 2; i >= 1; --i) {
-		layers[i]->back_propagation(*(layers[i + 1]), learning_rate);
+		layers[i]->back_propagation((layers[i + 1]), learning_rate);
 	}
 
 	delete[] last_delta;

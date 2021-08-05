@@ -6,8 +6,7 @@
 #define NERUALNWTWORK_NETWORK_H
 
 #include <cmath>
-#include <iostream>
-
+#include "cxr_header.h"
 #include "IFunction.h"
 #include "Layer.h"
 #include "LayerConstructionInfo.h"
@@ -21,14 +20,14 @@ class Network {
 	std::size_t layer_count;
 	// 神经网络的每层的大小
 	std::size_t* layer_length;
+    // 根据单一样本的误差进行反向传播，利用平方平均方法
 
+    void single_fit(double learning_rate, node_type target[]);
    public:
-	// 根据单一样本的误差进行反向传播，利用平方平均方法
-	void single_fit(double learning_rate, node_type target[]);
-
-   public:
-	// 通过初始化列表的方式实现不定参数
-	// 构造函数，用于构造network类，接受一个初始化列表，列表中的每一个元素是指向LayerConstrunctionInfo类的指针，这个类中存储了构造层所必要的信息，通过使用本类的静态方法来获得这样的一个指针。LayerConstructionInfo类中存储了层的大小，和这一层应用的激活函数（IFunctino）。
+    // 通过初的始化列表方式实现不定参数
+	// 构造函数，用于构造network类，接受一个初始化列表，列表中的每一个元素是指向LayerConstrunctionInfo类的指针，
+	// 这个类中存储了构造层所必要的信息，通过使用本类的静态方法来获得这样的一个指针。
+	// LayerConstructionInfo类中存储了层的大小，和这一层应用的激活函数（IFunctino）。
 	Network(std::initializer_list<LayerConstructionInfo*>);
 	~Network();
 
