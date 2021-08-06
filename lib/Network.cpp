@@ -82,3 +82,85 @@ void Network::single_fit(double learning_rate, node_type target[]) {
 
 	delete[] last_delta;
 }
+
+void Network::fit(double learning_rate, std::size_t epoch,
+				  std::size_t batch_size, std::string data_path,
+				  std::string label_path) {
+	FileReader fr(data_path, label_path);
+	auto basic_info = fr.FileInfo;
+	bool legal1, legal2 = true;
+
+	// 基本信息核验
+	legal1 = basic_info.image_size == layer_length[0];
+	legal2 = basic_info.label_size == layer_length[layer_count - 1];
+
+	if (!(legal1 & legal2)) {
+		std::cerr << "数据文件或标签文件与模型不一致。" << std::endl;
+		if (!legal1)
+			std::cerr << "数据文件与模型不一致。文件地址：" << data_path
+					  << std::endl;
+		if (!legal2)
+			std::cerr << "标签文件与模型不一致。文件地址：" << label_path
+					  << std::endl;
+		return;
+	} else {
+		std::cout << "开始训练。" << std::endl
+				  << "数据文件：" << data_path << std::endl
+				  << "标签文件：" << label_path << std::endl;
+
+		// delta存储数组
+		node_type* last_delta = new node_type[basic_info.label_size];
+		node_type *d_data_ptr = new node_type[basic_info.image_size],
+				  *d_label_ptr = new node_type[basic_info.label_size];
+		data_type *i_data_ptr, *i_label_ptr;
+
+		for (std::size_t turn_num = 0; turn_num < epoch; ++turn_num) {
+			// 开始训练第turn_num轮
+			std::cout << "开始训练Epoch " << turn_num << std::endl;
+
+			for (std::size_t group_num = 0;
+				 (group_num + 1) * batch_size < basic_info.image_n;
+				 ++group_num) {
+				// last_delta置0
+				for (std::size_t i = 0; i < basic_info.label_size; ++i)
+					last_delta[i] = 0.;
+				// 一次取batch_size的平均再反向传播
+				for (std::size_t sample_num = 0; sample_num < batch_size;
+					 ++sample_num) {
+					// 读入原始数据，类型为data_type
+					i_data_ptr = fr.getData();
+					i_label_ptr = fr.getLabel();
+
+					// 进行类型转换
+					// TODO: 可以使用传入函数指针进行转换
+					for (std::size_t i = 0; i < basic_info.image_size; ++i)
+						d_data_ptr[i] = (node_type)i_data_ptr[i] / 256.;
+					for (std::size_t i = 0; i < basic_info.label_size; ++i)
+						d_label_ptr[i] = (node_type)i_label_ptr[i] / 256.;
+
+					// 进行前向传播
+					auto result = this->evaluate(d_data_ptr);
+					// 计算最后一层delta
+					for (std::size_t i = 0; i < basic_info.label_size; ++i)
+						last_delta[i] +=
+							(result[i] - d_label_ptr[i]) *
+							layers[layer_count - 1]
+								->get_IFunction()
+								.d_activation(layers[layer_count - 1]
+												  ->get_integeration()[i]);
+				}
+				// delta取平均
+				for (std::size_t i = 0; i < basic_info.label_size; ++i)
+					last_delta[i] /= (node_type)batch_size;
+
+				// 进行反向传播
+				layers[layer_count - 1]->set_ddelta(last_delta);
+				layers[layer_count - 1]->back_propagation(nullptr,
+														  learning_rate);
+				for (std::size_t i = layer_count - 2; i >= 1; --i)
+					layers[i]->back_propagation(layers[i + 1], learning_rate);
+			}
+		}
+		delete[] last_delta;
+	}
+}
