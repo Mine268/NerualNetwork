@@ -1,28 +1,39 @@
 #include <iostream>
 
+#include "../lib/FileReader.h"
 #include "../lib/Network.h"
 
 int main() {
-	Network nn({Network::layer(3, func_sigmoid), Network::layer(2, func_sigmoid),
-				Network::layer(1, func_sigmoid)});
+	Network nn(
+		{Network::layer(784, func_sigmoid), Network::layer(12, func_sigmoid),
+		 Network::layer(12, func_sigmoid), Network::layer(10, func_sigmoid)});
+	FileReader fr(10, "../train/t10k-images.idx3-ubyte",
+				  "../train/t10k-labels.idx1-ubyte");
 
-	nn.print_network(std::cout);
+	node_type *d_data = new node_type[784];
+	const node_type *d_result;
+	data_type *i_data, *i_result;
 
-	auto res = nn.evaluate(new double[3]{1., 1., 1.0});
+	nn.fit(0.5, 1, 10, "../train/train-images.idx3-ubyte",
+		   "../train/train-labels.idx1-ubyte");
 
-	for (std::size_t i = 0; i < 1; ++i) cout << res[i] << ' ';
+	int count = 0;
+	for (int k = 0; k < 5000; k++) {
+		i_data = fr.getData();
+		i_result = fr.getLabel();
+		for (std::size_t i = 0; i < 784; ++i) d_data[i] = (node_type)i_data[i];
+		d_result = nn.evaluate(d_data);
+		
+		double max1 = -1.;
+		int max2 = -1.;
+		int maxi1 = 0, maxi2 = 0;
+		for (int i = 0; i < 10; ++i) if (d_result[i] > max1) max1 = d_result[i], maxi1 = i;
+		for (int i = 0; i < 10; ++i) if (i_result[i] > max2) max2 = i_data[i], maxi2 = i;
 
-	for (std::size_t i = 0; i < 1000; ++i) {
-		nn.single_fit(.1, new node_type[1]{0.});
-		nn.evaluate(new double[3]{1., 1., 1.0});
+		if (maxi1 == maxi2) ++count;
 	}
 
-	cout << endl;
-    res = nn.evaluate(new double[3]{1., 1., 1.0});
-	for (std::size_t i = 0; i < 1; ++i) cout << res[i] << ' ';
-
-    cout << endl << "-------" << endl;
-    nn.print_network(std::cout);
+	std::cout << (double)count / 5000;
 
 	return 0;
 }

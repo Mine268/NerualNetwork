@@ -1,5 +1,6 @@
 debug/
 cmake-build-debug/
 .vscode/
+train/
 makefile
 *.exe

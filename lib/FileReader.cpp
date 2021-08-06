@@ -4,7 +4,7 @@
 
 #include "FileReader.h"
 
-FileReader::FileReader(const string& dataPath, const string& labelPath)
+FileReader::FileReader(int classification, const string& dataPath, const string& labelPath)
 	: data_ifs(dataPath.c_str(), ios::binary),
 	  label_ifs(labelPath, ios::binary) {
 	// 读取image集的magic number作校验
@@ -32,7 +32,7 @@ FileReader::FileReader(const string& dataPath, const string& labelPath)
 	//获取label集样本信息
 	label_ifs.read(buf, 4);
 	label_n = MsbInt(buf);
-	label_size = 1;
+	label_size = classification;
 
 	if (label_n != data_n) {
 		cerr << "labels and images are unmatched!" << endl;
