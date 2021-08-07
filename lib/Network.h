@@ -40,7 +40,7 @@ class Network {
 	// - batch_size 每次取的训练样本的大小
 	// - data_path 训练数据输入的文件
 	// - label_path 训练标签的位置
-	void fit(double learningRate, std::size_t epoch, std::size_t batch_size,
+	void fit(double learningRate, int epoch, int batch_size,
 			 std::string data_path, std::string label_path);
 	// 依据输入进行计算得到输出
 	// data就是输入向量，注意输入向量的维数必须与神经网络的第一层相同，如果不相同则结果未定义

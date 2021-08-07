@@ -84,8 +84,8 @@ void Network::single_fit(double learning_rate, node_type target[]) {
 	delete[] last_delta;
 }
 
-void Network::fit(double learning_rate, std::size_t epoch,
-				  std::size_t batch_size, std::string data_path,
+void Network::fit(double learning_rate, int epoch,
+				  int batch_size, std::string data_path,
 				  std::string label_path) {
 	FileReader fr(layer_length[layer_count - 1], data_path, label_path);
 	auto basic_info = fr.FileInfo;
@@ -110,7 +110,7 @@ void Network::fit(double learning_rate, std::size_t epoch,
 				  << "标签文件：" << label_path << std::endl;
 
 		// delta存储数组
-		node_type* last_delta = new node_type[basic_info.label_size];
+		node_type *last_delta = new node_type[basic_info.label_size];
 		node_type *d_data_ptr = new node_type[basic_info.image_size],
 				  *d_label_ptr = new node_type[basic_info.label_size];
 		data_type *i_data_ptr, *i_label_ptr;
@@ -165,5 +165,7 @@ void Network::fit(double learning_rate, std::size_t epoch,
 			std::cout << "训练完成" << std::endl;
 		}
 		delete[] last_delta;
+		delete[] d_data_ptr;
+		delete[] d_label_ptr;
 	}
 }
