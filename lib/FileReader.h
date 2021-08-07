@@ -9,7 +9,6 @@ typedef int data_type;	//训练集基本元素类型
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 

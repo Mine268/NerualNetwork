@@ -60,8 +60,10 @@ data_type* FileReader::getLabel() {
 	for (int i = 0; i < label_size; ++i) label[i] = .0;
 	label[label_ifs.get()] = 1.;
 	if(label_ifs.peek()==EOF){
-	    label_ifs.clear();
+	    label_ifs.clear();//重制流错误信息，这行必须否则seekg不工作
 	    label_ifs.seekg(0,ios::beg);
+	    char tmp[100];
+	    label_ifs.read(tmp,8);//读取前缀的无用信息
 	}
 	return label;
 }
@@ -73,8 +75,10 @@ data_type* FileReader::getData() {
 		data[i] = data_ifs.get();
 	}
 	if(data_ifs.peek()==EOF){
-	    data_ifs.clear();
+	    data_ifs.clear();//重制流错误信息，这行必须否则seekg不工作
 	    data_ifs.seekg(0,ios::beg);
+	    char tmp[100];
+	    data_ifs.read(tmp,16);//读取前缀的无用信息
 	}
 	return data;
 }
