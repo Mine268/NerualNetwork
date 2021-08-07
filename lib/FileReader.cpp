@@ -59,6 +59,10 @@ data_type* FileReader::getLabel() {
 	label = new data_type[label_size];
 	for (int i = 0; i < label_size; ++i) label[i] = .0;
 	label[label_ifs.get()] = 1.;
+	if(label_ifs.peek()==EOF){
+	    label_ifs.clear();
+	    label_ifs.seekg(0,ios::beg);
+	}
 	return label;
 }
 
@@ -68,5 +72,16 @@ data_type* FileReader::getData() {
 	for (int i = 0; i < data_size; i++) {
 		data[i] = data_ifs.get();
 	}
+	if(data_ifs.peek()==EOF){
+	    data_ifs.clear();
+	    data_ifs.seekg(0,ios::beg);
+	}
 	return data;
+}
+
+FileReader::~FileReader() {
+    if(data_ifs.is_open())data_ifs.close();
+    if(label_ifs.is_open())label_ifs.close();
+    if(!data)delete data;
+    if(!label)delete label;
 }

@@ -16,6 +16,7 @@ using namespace std;
 class FileReader {
    public:
 	FileReader(int classification, const string& dataPath, const string& labelPath);
+	~FileReader();
 	data_type* getLabel();
 	data_type* getData();
 	struct {
