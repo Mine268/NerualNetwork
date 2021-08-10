@@ -6,16 +6,16 @@
 int main() {
 	Network nn(
 		{Network::layer(784, func_sigmoid), Network::layer(50, func_sigmoid),
-		 Network::layer(12, func_sigmoid), Network::layer(10, func_sigmoid)});
-	FileReader fr(10, "../train/t10k-images.idx3-ubyte",
-				  "../train/t10k-labels.idx1-ubyte");
+		 Network::layer(20, func_sigmoid), Network::layer(10, func_sigmoid)});
+	FileReader fr(10, "D:\\study\\CLionProjects\\net\\NerualNetwork\\train\\t10k-images.idx3-ubyte",
+                  "D:\\study\\CLionProjects\\net\\NerualNetwork\\train\\t10k-labels.idx1-ubyte");
 
 	node_type *d_data = new node_type[784];
 	const node_type *d_result;
 	data_type *i_data, *i_result;
 
-	nn.fit(1.5, 1, 10, "../train/train-images.idx3-ubyte",
-		   "../train/train-labels.idx1-ubyte");
+	nn.fit(0.35, 1, 1, "D:\\study\\CLionProjects\\net\\NerualNetwork\\train\\train-images.idx3-ubyte",
+           "D:\\study\\CLionProjects\\net\\NerualNetwork\\train\\train-labels.idx1-ubyte");
 
 	int count = 0;
 	for (int k = 0; k < 5000; k++) {

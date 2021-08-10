@@ -9,6 +9,7 @@
 #include <algorithm>
 #include "cxr_header.h"
 #include "IFunction.h"
+#include <fstream>
 using namespace std;
 
 class Layer {
@@ -71,6 +72,12 @@ public:
 
     //打印层的相关信息
     friend ostream &operator<<(ostream &os, Layer &one);
+
+    //保存层的信息,在指定文件夹下
+    void save_data(string dir);
+
+    //在指定文件夹下读取数据
+    void load_data(string dir);
 
     void debug();
 

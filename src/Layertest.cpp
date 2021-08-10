@@ -36,21 +36,18 @@ void test_forward_backward(){
     layer.debug2();
 
 
-
     cout<<"反向传播后："<<endl;
     cout<<layer;
 }
-void test_copy_operator(){
+void test_save_load(){
     Sigmoid sigmoid;
-    Layer first(2,4,sigmoid);
-    Layer two(first);
+    Layer first(10,20,sigmoid);
     cout<<first;
-    cout<<two;
-
+    first.save_data("../data");
 }
 
 int main() {
-    test_forward_backward();
-//    test_copy_operator();
+//    test_forward_backward();
+    test_save_load();
 
 }

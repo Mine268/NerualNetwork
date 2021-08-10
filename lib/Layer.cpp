@@ -62,13 +62,17 @@ IFunction &Layer::get_IFunction() {
 void Layer::init_wb() {
 	//初始化weight矩阵与biases,biases全部初始化为0，weight初始化为均值为0，方差为1的矩阵
 	//初始化weight的过程中顺带把dweight初始化为0
-	//    auto seed = 4;//固定值用来debug
-	//    default_random_engine engine_need(seed);
+//	auto seed = 4;//固定值用来debug
 	default_random_engine engine_need(time(nullptr));
+//	default_random_engine engine_need(seed);
 	normal_distribution<node_type> distribution(0, 1);
 	for (int i = 0; i < input_size; i++) {
 		for (int j = 0; j < output_size; j++) {
-			weight[i][j] = distribution(engine_need);
+		    //适用于sigmoid的初始化
+//			weight[i][j] = distribution(engine_need)* sqrt(1/input_size);
+			weight[i][j] = distribution(engine_need)*0.1;
+			//适用于relu的初始化
+//			weight[i][j] = distribution(engine_need)* sqrt(2/input_size);
 			dweight[i][j] = 0;
 		}
 	}
@@ -160,7 +164,46 @@ void Layer::back_propagation(Layer *backLayer, node_type learning_rate) {
 		biases[i] -= (learning_rate * dbiases[i]);
 	}
 }
+void Layer::save_data(string dir) {
+    //在dir目录下新建一个weight_bias_delta.dat文件
+    //将weight,bias,delta存入文件中
+    //保存文件
+    ofstream outfile(dir+"weight.dat",ios::binary|ios::out);
+    if(outfile.is_open()){
+        //打开文件成功
+        //写入验证数据
+        outfile.write((char *)&input_size, sizeof(input_size));
+        outfile.write((char*)&output_size,sizeof(output_size));
+        for(int i=0;i<input_size;i++)
+            outfile.write((char*)weight[i],sizeof(node_type)*output_size);
+        outfile.write((char*)biases, sizeof(node_type)*output_size);
+        outfile.write((char*)ddelta,sizeof(node_type)*output_size);
+        outfile.close();
+    } else{
+        cerr<<"打开文件失败"<<endl;
+    }
 
+}
+void Layer::load_data(string dir) {
+    ifstream infile(dir+"weight.dat",ios::binary|ios::in);
+    if(infile.is_open()){
+        int input_size_dat;
+        int output_size_dat;
+        infile.read((char*)&input_size_dat,sizeof(int));
+        infile.read((char *)&output_size_dat,sizeof(int));
+        if(input_size_dat!=input_size||output_size_dat!=output_size){
+            cerr<<"层大小错误";
+        }
+        for(int i=0;i<input_size;i++)
+            infile.read((char*)weight[i],sizeof(double)*output_size);
+        infile.read((char*)biases,sizeof (node_type)*output_size);
+        infile.read((char*)ddelta,sizeof(node_type)*output_size);
+        infile.close();
+    }
+    else{
+        cerr<<"打开文件失败"<<endl;
+    }
+}
 void Layer::debug() {
 	cout << "integration: \n";
 	for_each(integeration, integeration + output_size,
