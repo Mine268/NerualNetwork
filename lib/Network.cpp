@@ -2,16 +2,16 @@
 
 Network::Network(std::initializer_list<LayerConstructionInfo*> list)
 	: layers(nullptr), layer_count(0), layer_length(nullptr) {
-	// é¦–å…ˆè®¡ç®—å‡ºæ€»å…±éœ€è¦å¤šå°‘å±‚
+	// Ê×ÏÈ¼ÆËã³ö×Ü¹²ĞèÒª¶àÉÙ²ã
 	for (auto lyrInfo : list) ++layer_count;
 
-	// åˆ†é…ç©ºé—´
+	// ·ÖÅä¿Õ¼ä
 	layers = new Layer*[layer_count];
 	layer_length = new std::size_t[layer_count];
 
 	auto indication = list.end() - 1;
 	std::size_t tmp = 1;
-	// ä»æœ€åä¸€å±‚é€å±‚å»ºç«‹
+	// ´Ó×îºóÒ»²ãÖğ²ã½¨Á¢
 	while (indication > list.begin()) {
 		layers[layer_count - tmp] =
 			new Layer((*(indication - 1))->size, (*indication)->size,
@@ -24,7 +24,7 @@ Network::Network(std::initializer_list<LayerConstructionInfo*> list)
 	layers[0] = new Layer(0, (*indication)->size, *((*indication)->activation));
 	layer_length[0] = (*indication)->size;
 
-	// é‡Šæ”¾LayerConstructionInfo
+	// ÊÍ·ÅLayerConstructionInfo
 	for (auto i : list) delete i;
 }
 
@@ -35,7 +35,7 @@ Network::~Network() {
 }
 
 LayerConstructionInfo* Network::layer(std::size_t size, IFunction& func) {
-	// æ³¨æ„ï¼Œnewåéœ€è¦deleteï¼
+	// ×¢Òâ£¬newºóĞèÒªdelete£¡
 	LayerConstructionInfo* re = new LayerConstructionInfo;
 	re->size = size;
 	re->activation = &func;
@@ -74,7 +74,7 @@ void Network::single_fit(double learning_rate, node_type target[]) {
 
 	layers[layer_count - 1]->set_ddelta(last_delta);
 
-	// CLF ä¿®æ”¹
+	// CLF ĞŞ¸Ä
 	layers[layer_count - 1]->back_propagation(nullptr, learning_rate);
 
 	for (std::size_t i = layer_count - 2; i >= 1; --i) {
@@ -91,57 +91,57 @@ void Network::fit(double learning_rate, int epoch,
 	auto basic_info = fr.FileInfo;
 	bool legal1, legal2;
 
-	// åŸºæœ¬ä¿¡æ¯æ ¸éªŒ
+	// »ù±¾ĞÅÏ¢ºËÑé
 	legal1 = (basic_info.image_size == layer_length[0]);
 	legal2 = (basic_info.label_size == layer_length[layer_count - 1]);
 
 	if (!(legal1 & legal2)) {
-		std::cerr << "æ•°æ®æ–‡ä»¶æˆ–æ ‡ç­¾æ–‡ä»¶ä¸æ¨¡å‹ä¸ä¸€è‡´ã€‚" << std::endl;
+		std::cerr << "Êı¾İÎÄ¼ş»ò±êÇ©ÎÄ¼şÓëÄ£ĞÍ²»Ò»ÖÂ¡£" << std::endl;
 		if (!legal1)
-			std::cerr << "æ•°æ®æ–‡ä»¶ä¸æ¨¡å‹ä¸ä¸€è‡´ã€‚æ–‡ä»¶åœ°å€ï¼š" << data_path
+			std::cerr << "Êı¾İÎÄ¼şÓëÄ£ĞÍ²»Ò»ÖÂ¡£ÎÄ¼şµØÖ·£º" << data_path
 					  << std::endl;
 		if (!legal2)
-			std::cerr << "æ ‡ç­¾æ–‡ä»¶ä¸æ¨¡å‹ä¸ä¸€è‡´ã€‚æ–‡ä»¶åœ°å€ï¼š" << label_path
+			std::cerr << "±êÇ©ÎÄ¼şÓëÄ£ĞÍ²»Ò»ÖÂ¡£ÎÄ¼şµØÖ·£º" << label_path
 					  << std::endl;
 		return;
 	} else {
-		std::cout << "å¼€å§‹è®­ç»ƒã€‚" << std::endl
-				  << "æ•°æ®æ–‡ä»¶ï¼š" << data_path << std::endl
-				  << "æ ‡ç­¾æ–‡ä»¶ï¼š" << label_path << std::endl;
+		std::cout << "¿ªÊ¼ÑµÁ·¡£" << std::endl
+				  << "Êı¾İÎÄ¼ş£º" << data_path << std::endl
+				  << "±êÇ©ÎÄ¼ş£º" << label_path << std::endl;
 
-		// deltaå­˜å‚¨æ•°ç»„
+		// delta´æ´¢Êı×é
 		node_type *last_delta = new node_type[basic_info.label_size];
 		node_type *d_data_ptr = new node_type[basic_info.image_size],
 				  *d_label_ptr = new node_type[basic_info.label_size];
 		data_type *i_data_ptr, *i_label_ptr;
 
 		for (std::size_t turn_num = 0; turn_num < epoch; ++turn_num) {
-			// å¼€å§‹è®­ç»ƒç¬¬turn_numè½®
-			std::cout << "å¼€å§‹è®­ç»ƒEpoch " << turn_num << "...";
+			// ¿ªÊ¼ÑµÁ·µÚturn_numÂÖ
+			std::cout << "¿ªÊ¼ÑµÁ·Epoch " << turn_num << "...";
 
 			for (int group_num = 0;
 				 (group_num + 1) * batch_size < basic_info.image_n;
 				 ++group_num) {
-				// last_deltaç½®0
+				// last_deltaÖÃ0
 				for (int i = 0; i < basic_info.label_size; ++i)
 					last_delta[i] = 0.;
-				// ä¸€æ¬¡å–batch_sizeçš„å¹³å‡å†åå‘ä¼ æ’­
+				// Ò»´ÎÈ¡batch_sizeµÄÆ½¾ùÔÙ·´Ïò´«²¥
 				for (int sample_num = 0; sample_num < batch_size;
 					 ++sample_num) {
-					// è¯»å…¥åŸå§‹æ•°æ®ï¼Œç±»å‹ä¸ºdata_type
+					// ¶ÁÈëÔ­Ê¼Êı¾İ£¬ÀàĞÍÎªdata_type
 					i_data_ptr = fr.getData();
 					i_label_ptr = fr.getLabel();
 
-					// è¿›è¡Œç±»å‹è½¬æ¢
-					// TODO: å¯ä»¥ä½¿ç”¨ä¼ å…¥å‡½æ•°æŒ‡é’ˆè¿›è¡Œè½¬æ¢
+					// ½øĞĞÀàĞÍ×ª»»
+					// TODO: ¿ÉÒÔÊ¹ÓÃ´«Èëº¯ÊıÖ¸Õë½øĞĞ×ª»»
 					for (int i = 0; i < basic_info.image_size; ++i)
 						d_data_ptr[i] = (node_type)i_data_ptr[i] / 256.;
 					for (int i = 0; i < basic_info.label_size; ++i)
 						d_label_ptr[i] = (node_type)i_label_ptr[i];
 
-					// è¿›è¡Œå‰å‘ä¼ æ’­
+					// ½øĞĞÇ°Ïò´«²¥
 					auto result = this->evaluate(d_data_ptr);
-					// è®¡ç®—æœ€åä¸€å±‚delta
+					// ¼ÆËã×îºóÒ»²ãdelta
 					for (int i = 0; i < basic_info.label_size; ++i)
 						last_delta[i] +=
 							(result[i] - d_label_ptr[i]) *
@@ -150,19 +150,19 @@ void Network::fit(double learning_rate, int epoch,
 								.d_activation(layers[layer_count - 1]
 												  ->get_integeration()[i]);
 				}
-				// deltaå–å¹³å‡
+				// deltaÈ¡Æ½¾ù
 				for (int i = 0; i < basic_info.label_size; ++i)
 					last_delta[i] /= (node_type)batch_size;
 
-				// è¿›è¡Œåå‘ä¼ æ’­
+				// ½øĞĞ·´Ïò´«²¥
 				layers[layer_count - 1]->set_ddelta(last_delta);
 				layers[layer_count - 1]->back_propagation(nullptr,
 														  learning_rate);
 				for (std::size_t i = layer_count - 2; i >= 1; --i)
 					layers[i]->back_propagation(layers[i + 1], learning_rate);
 			}
-			// è¾“å‡ºä¿¡æ¯
-			std::cout << "è®­ç»ƒå®Œæˆ" << std::endl;
+			// Êä³öĞÅÏ¢
+			std::cout << "ÑµÁ·Íê³É" << std::endl;
 		}
 		delete[] last_delta;
 		delete[] d_data_ptr;

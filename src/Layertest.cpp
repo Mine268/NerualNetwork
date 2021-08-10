@@ -1,5 +1,6 @@
 #include "Layer.h"
 #include <iostream>
+#include "windows.h"
 using namespace std;
 
 
@@ -41,9 +42,15 @@ void test_forward_backward(){
 }
 void test_save_load(){
     Sigmoid sigmoid;
-    Layer first(10,20,sigmoid);
+    Layer first(4,5,sigmoid);
     cout<<first;
     first.save_data("../data");
+    Sleep(1000);
+    Layer test(4,5,sigmoid);
+    cout<<test;
+    test.load_data("../data");
+    cout<<test;
+
 }
 
 int main() {

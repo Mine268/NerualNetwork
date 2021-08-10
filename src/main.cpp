@@ -5,8 +5,8 @@
 
 int main() {
 	Network nn(
-		{Network::layer(784, func_sigmoid), Network::layer(50, func_sigmoid),
-		 Network::layer(20, func_sigmoid), Network::layer(10, func_sigmoid)});
+		{Network::layer(784, func_sigmoid), Network::layer(100, func_sigmoid),
+		 Network::layer(50, func_sigmoid), Network::layer(10, func_sigmoid)});
 	FileReader fr(10, "D:\\study\\CLionProjects\\net\\NerualNetwork\\train\\t10k-images.idx3-ubyte",
                   "D:\\study\\CLionProjects\\net\\NerualNetwork\\train\\t10k-labels.idx1-ubyte");
 

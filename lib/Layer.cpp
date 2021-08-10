@@ -62,15 +62,15 @@ IFunction &Layer::get_IFunction() {
 void Layer::init_wb() {
 	//初始化weight矩阵与biases,biases全部初始化为0，weight初始化为均值为0，方差为1的矩阵
 	//初始化weight的过程中顺带把dweight初始化为0
-//	auto seed = 4;//固定值用来debug
-	default_random_engine engine_need(time(nullptr));
+    srand(time(0));
+	default_random_engine engine_need(rand());
 //	default_random_engine engine_need(seed);
 	normal_distribution<node_type> distribution(0, 1);
 	for (int i = 0; i < input_size; i++) {
 		for (int j = 0; j < output_size; j++) {
 		    //适用于sigmoid的初始化
-//			weight[i][j] = distribution(engine_need)* sqrt(1/input_size);
-			weight[i][j] = distribution(engine_need)*0.1;
+			weight[i][j] = distribution(engine_need)* sqrt(1.0/input_size);
+//			weight[i][j] = distribution(engine_need)*0.1;
 			//适用于relu的初始化
 //			weight[i][j] = distribution(engine_need)* sqrt(2/input_size);
 			dweight[i][j] = 0;
@@ -192,7 +192,7 @@ void Layer::load_data(string dir) {
         infile.read((char*)&input_size_dat,sizeof(int));
         infile.read((char *)&output_size_dat,sizeof(int));
         if(input_size_dat!=input_size||output_size_dat!=output_size){
-            cerr<<"层大小错误";
+            cerr<<"Layer size error";
         }
         for(int i=0;i<input_size;i++)
             infile.read((char*)weight[i],sizeof(double)*output_size);
@@ -201,7 +201,7 @@ void Layer::load_data(string dir) {
         infile.close();
     }
     else{
-        cerr<<"打开文件失败"<<endl;
+        cerr<<"Open failed"<<endl;
     }
 }
 void Layer::debug() {
